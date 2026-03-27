@@ -15,7 +15,7 @@ provider "esxi" {
 }
 
 locals {
-  ssh_public_key = trimspace(file("~/.ssh/id_ed25519.pub"))
+  ssh_public_key = trimspace(file("/home/s1073133/.ssh/id_ed25519.pub"))
 }
 
 resource "esxi_guest" "webserver" {
@@ -34,13 +34,13 @@ resource "esxi_guest" "webserver" {
   }
 
   guestinfo = {
-    "userdata" = base64gzip(<<-EOT
+    "userdata" = base64gzip(<<-EOF
       #cloud-config
       users:
         - name: ubuntu
           ssh_authorized_keys:
             - ${local.ssh_public_key}
-      EOT
+      EOF
     )
     "userdata.encoding" = "gzip+base64"
 
@@ -67,13 +67,13 @@ resource "esxi_guest" "databaseserver" {
   }
 
   guestinfo = {
-    "userdata" = base64gzip(<<-EOT
+    "userdata" = base64gzip(<<-EOF
       #cloud-config
       users:
         - name: ubuntu
           ssh_authorized_keys:
             - ${local.ssh_public_key}
-      EOT
+      EOF
     )
     "userdata.encoding" = "gzip+base64"
 
