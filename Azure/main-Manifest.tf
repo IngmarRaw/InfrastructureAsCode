@@ -17,7 +17,11 @@ provider "azurerm" {
 
 locals {
   ssh_public_key = trimspace(file(var.ssh_public_key_path))
+    azure_cloudinit = templatefile("${path.module}/cloudinit.tftpl", {
+    username = var.admin_username
+  })
 }
+
 
 data "azurerm_virtual_network" "vnet" {
   name                = var.virtual_network_name
@@ -38,7 +42,13 @@ resource "azurerm_public_ip" "pip" {
   allocation_method   = "Static"
   sku                 = "Standard"
 }
+resource "local_file" "rendered_cloudinit" {
 
+  filename = "${path.module}/rendered-cloudinit.yaml"
+
+  content  = local.azure_cloudinit
+
+}
 resource "azurerm_network_interface" "nic" {
   count               = var.vm_count
   name                = "nic-${var.vm_name_prefix}-${count.index + 1}"
