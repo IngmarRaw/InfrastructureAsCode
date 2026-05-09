@@ -39,8 +39,9 @@ resource "esxi_guest" "webserver" {
 
   guestinfo = {
     "userdata" = base64gzip(templatefile("${path.module}/cloudinit.tftpl", {
-      username       = var.vm_username
-      ssh_public_key = local.ssh_public_key
+      username        = var.vm_username
+      password        = var.vm_password
+      ssh_public_key  = local.ssh_public_key
       ssh_private_key = local.ssh_private_key
     }))
     "userdata.encoding" = "gzip+base64"
@@ -69,8 +70,9 @@ resource "esxi_guest" "databaseserver" {
 
   guestinfo = {
     "userdata" = base64gzip(templatefile("${path.module}/cloudinit.tftpl", {
-      username       = var.vm_username
-      ssh_public_key = local.ssh_public_key
+      username        = var.vm_username
+      password        = var.vm_password
+      ssh_public_key  = local.ssh_public_key
       ssh_private_key = local.ssh_private_key
     }))
     "userdata.encoding" = "gzip+base64"

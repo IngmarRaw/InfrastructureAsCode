@@ -50,6 +50,11 @@ variable "vm_username" {
   default = "iacuser"
 }
 
+variable "vm_password" {
+  type      = string
+  sensitive = true
+}
+
 variable "webserver_count" {
   type    = number
   default = 2

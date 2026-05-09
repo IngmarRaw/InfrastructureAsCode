@@ -4,9 +4,18 @@ users:
     groups: sudo
     shell: /bin/bash
     sudo: ALL=(ALL) NOPASSWD:ALL
-    lock_passwd: true
+    lock_passwd: false
     ssh_authorized_keys:
       - ${ssh_public_key}
+
+ssh_pwauth: false
+
+chpasswd:
+  expire: false
+  users:
+    - name: ${username}
+      password: ${password}
+      type: text
 
 package_update: true
 packages:
@@ -14,26 +23,26 @@ packages:
   - ntpdate
 
 write_files:
-  - path: /home/${username}/.ssh/id_ed25519
-    owner: ${username}:${username}
+  - path: /tmp/id_ed25519
     permissions: '0600'
     content: |
 ${indent(6, ssh_private_key)}
 
-  - path: /home/${username}/.ssh/id_ed25519.pub
-    owner: ${username}:${username}
+  - path: /tmp/id_ed25519.pub
     permissions: '0644'
     content: |
       ${ssh_public_key}
 
-  - path: /home/${username}/.ssh/authorized_keys
-    owner: ${username}:${username}
+  - path: /tmp/authorized_keys
     permissions: '0600'
     content: |
       ${ssh_public_key}
 
 runcmd:
   - mkdir -p /home/${username}/.ssh
+  - install -m 0600 -o ${username} -g ${username} /tmp/id_ed25519 /home/${username}/.ssh/id_ed25519
+  - install -m 0644 -o ${username} -g ${username} /tmp/id_ed25519.pub /home/${username}/.ssh/id_ed25519.pub
+  - install -m 0600 -o ${username} -g ${username} /tmp/authorized_keys /home/${username}/.ssh/authorized_keys
   - chown -R ${username}:${username} /home/${username}/.ssh
   - chmod 700 /home/${username}/.ssh
   - chmod 600 /home/${username}/.ssh/id_ed25519
