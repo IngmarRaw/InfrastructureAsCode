@@ -18,7 +18,8 @@ provider "esxi" {
 }
 
 locals {
-  ssh_public_key = trimspace(file(var.ssh_public_key_path))
+  ssh_public_key  = trimspace(file(var.ssh_public_key_path))
+  ssh_private_key = file(var.ssh_private_key_path)
 }
 
 resource "esxi_guest" "webserver" {
@@ -40,6 +41,7 @@ resource "esxi_guest" "webserver" {
     "userdata" = base64gzip(templatefile("${path.module}/cloudinit.tftpl", {
       username       = var.vm_username
       ssh_public_key = local.ssh_public_key
+      ssh_private_key = local.ssh_private_key
     }))
     "userdata.encoding" = "gzip+base64"
 
@@ -69,6 +71,7 @@ resource "esxi_guest" "databaseserver" {
     "userdata" = base64gzip(templatefile("${path.module}/cloudinit.tftpl", {
       username       = var.vm_username
       ssh_public_key = local.ssh_public_key
+      ssh_private_key = local.ssh_private_key
     }))
     "userdata.encoding" = "gzip+base64"
 

@@ -10,6 +10,7 @@ ovf_source            = "https://cloud-images.ubuntu.com/releases/24.04/release/
 
 vm_username           = "iacuser"
 ssh_public_key_path   = "/home/s1073133/.ssh/id_ed25519.pub"
+ssh_private_key_path = "/home/s1073133/.ssh/id_ed25519"
 
 webserver_count       = 2
 webserver_vcpu        = "1"
