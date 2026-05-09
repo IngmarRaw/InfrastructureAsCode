@@ -8,5 +8,5 @@ subnet_name          = "IAC"
 vm_count             = 2
 vm_name_prefix       = "azurevm"
 vm_size              = "Standard_B2ats_v2"
-admin_username       = "iac"
+admin_username       = "iacuser"
 ssh_public_key_path  = "/home/s1073133/.ssh/id_ed25519.pub"
