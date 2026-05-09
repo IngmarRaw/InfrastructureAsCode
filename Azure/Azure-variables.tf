@@ -16,24 +16,8 @@ variable "virtual_network_name" {
   default = "iac-vnet"
 }
 
-variable "vnet_address_space" {
-  type    = list(string)
-  default = ["10.10.0.0/16"]
-}
-
 variable "subnet_name" {
-  type    = string
-  default = "iac-subnet"
-}
-
-variable "subnet_address_prefixes" {
-  type    = list(string)
-  default = ["10.10.1.0/24"]
-}
-
-variable "network_security_group_name" {
-  type    = string
-  default = "iac-nsg"
+  type = string
 }
 
 variable "vm_count" {
@@ -58,24 +42,4 @@ variable "admin_username" {
 
 variable "ssh_public_key_path" {
   type = string
-}
-
-variable "image_publisher" {
-  type    = string
-  default = "Canonical"
-}
-
-variable "image_offer" {
-  type    = string
-  default = "ubuntu-24_04-lts"
-}
-
-variable "image_sku" {
-  type    = string
-  default = "server"
-}
-
-variable "image_version" {
-  type    = string
-  default = "latest"
 }
