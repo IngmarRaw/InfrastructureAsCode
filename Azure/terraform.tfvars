@@ -1,5 +1,5 @@
 subscription_id       = "c064671c-8f74-4fec-b088-b53c568245eb"
-resource_group_name   = "rg-iac-azure"
+resource_group_name   = "s1073133"
 location              = "westeurope"
 
 virtual_network_name       = "iac-vnet"
