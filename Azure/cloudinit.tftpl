@@ -1,7 +1,6 @@
 #cloud-config
 write_files:
   - path: /home/${username}/hello.txt
-    owner: ${username}:${username}
     permissions: '0644'
     content: |
       Hello World
