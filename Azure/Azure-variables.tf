@@ -7,13 +7,11 @@ variable "resource_group_name" {
 }
 
 variable "location" {
-  type    = string
-  default = "westeurope"
+  type = string
 }
 
 variable "virtual_network_name" {
-  type    = string
-  default = "iac-vnet"
+  type = string
 }
 
 variable "subnet_name" {
@@ -37,7 +35,7 @@ variable "vm_size" {
 
 variable "admin_username" {
   type    = string
-  default = "iac"
+  default = "iacuser"
 }
 
 variable "ssh_public_key_path" {
