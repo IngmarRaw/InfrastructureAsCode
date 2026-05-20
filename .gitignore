@@ -1,0 +1,12 @@
+*.tfvars
+*.pem
+*.tfstate
+*.tfstate.*
+.terraform/
+crash.log
+rendered-cloudinit.yaml
+vm_ips.txt
+azure_vm_ips.txt
+inventory.ini
+inventory_esxi.ini
+inventory_azure.ini
