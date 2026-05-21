@@ -1,6 +1,24 @@
 #cloud-config
+package_update: true
+packages:
+  - wget
+  - curl
+  - net-tools
+
 write_files:
   - path: /home/${username}/hello.txt
+    owner: ${username}:${username}
     permissions: '0644'
     content: |
       Hello World
+
+  - path: /home/${username}/info.txt
+    owner: ${username}:${username}
+    permissions: '0644'
+    content: |
+      Deze VM is automatisch geconfigureerd met cloud-init.
+
+runcmd:
+  - chown ${username}:${username} /home/${username}/hello.txt
+  - chown ${username}:${username} /home/${username}/info.txt
+  - systemctl restart ssh
